@@ -7,6 +7,15 @@ export default {
       colors: {
         backgroundcolor: 'var(--backgroundcolor)',
         itembgcolor: 'var(--itembgcolor)',
+        textcolormain: 'var(--textcolormain)',
+        hellosvgcolor: 'var(--hellosvgcolor)',
+        primarycolor1: 'var(--primarycolor1)',
+        primarycolor2: 'var(--primarycolor2)',
+        gradientcolor1: 'var(--gradientcolor1)',
+        gradientcolor2: 'var(--gradientcolor2)',
+        twittercolor: 'var(--twittercolor)',
+        linkedincolor: 'var(--linkedincolor)',
+        mailcolor: 'var(--mailcolor)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

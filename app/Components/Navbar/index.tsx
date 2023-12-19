@@ -4,7 +4,7 @@ import { ThemeSession } from "../../session";
 export default function Navbar({ theme = "light" }: ThemeSession) {
 
   return (
-    <div className="flex justify-between align-middle mt-4 rounded-lg py-7 px-9 bg-itembgcolor">
+    <div className="flex justify-between align-middle mt-6 mb-10 rounded-lg py-7 px-9 bg-itembgcolor">
       <div className="flex gap-16">
         <button>Home</button>
         <button>Blogs</button>

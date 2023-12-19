@@ -70,7 +70,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-backgroundcolor font-inter">
+      <body className="bg-backgroundcolor font-inter text-textcolormain">
         <MaxWidthWrapper>
           <Navbar theme={theme} />
           <Outlet />

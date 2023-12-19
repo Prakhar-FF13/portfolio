@@ -10,6 +10,8 @@ import {
 } from "@remix-run/react";
 
 import stylesheet from "./styles/tailwind.css";
+import MaxWidthWrapper from "./Components/MaxWidthWrapper";
+import Navbar from "./Components/Navbar";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -18,15 +20,18 @@ export const links: LinksFunction = () => [
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className="bg-backgroundcolor">
+        <MaxWidthWrapper>
+          <Navbar />
+          <Outlet />
+        </MaxWidthWrapper>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

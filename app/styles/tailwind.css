@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html[data-theme='light'] {
+    --backgroundcolor: rgba(255, 160, 170, 0.3);
+    --itembgcolor: white;
+  }
+
+  html[data-theme='dark'] {
+    --backgroundcolor: rgba(72, 72, 72, 1);
+    --itembgcolor: rgba(114, 114, 114, 1);
+  }
+}

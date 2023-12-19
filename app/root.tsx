@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import { ActionFunctionArgs, json, redirect, type LinksFunction, type LoaderFunctionArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,20 +7,63 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 
 import stylesheet from "./styles/tailwind.css";
 import MaxWidthWrapper from "./Components/MaxWidthWrapper";
 import Navbar from "./Components/Navbar";
+import { themeCookieSession } from "./session";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   { rel: "stylesheet", href: stylesheet },
 ];
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await themeCookieSession.getSession(request.headers.get("cookie"))
+
+  if (session.has("theme")) {
+    return json({ theme: session.get("theme") }, {
+      headers: {
+        'Set-Cookie': await themeCookieSession.commitSession(session)
+      }
+    })
+  } else {
+    session.set("theme", "light")
+    return json({ theme: "light" }, {
+      headers: {
+        'Set-Cookie': await themeCookieSession.commitSession(session)
+      }
+    })
+  }
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const session = await themeCookieSession.getSession(request.headers.get("cookie"))
+  const formData = await request.formData()
+
+  const theme = formData.get("theme")
+
+  // only possible theme types are "light" and "dark"
+  if (theme === "dark" || theme === "light")
+    session.set("theme", theme)
+  else // somehow something different is received set to light only
+    session.set("theme", "light")
+
+  return redirect(request.url, {
+    headers: {
+      'Set-Cookie': await themeCookieSession.commitSession(session)
+    }
+  })
+}
+
 export default function App() {
+  const data = useLoaderData<typeof loader>()
+  const theme = data.theme === "dark" ? "dark" : "light";
+
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +72,7 @@ export default function App() {
       </head>
       <body className="bg-backgroundcolor">
         <MaxWidthWrapper>
-          <Navbar />
+          <Navbar theme={theme} />
           <Outlet />
         </MaxWidthWrapper>
         <ScrollRestoration />

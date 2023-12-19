@@ -7,6 +7,10 @@ export default {
       colors: {
         backgroundcolor: 'var(--backgroundcolor)',
         itembgcolor: 'var(--itembgcolor)',
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        leagueSpartan: ['League Spartan', 'sans-serif'],
       }
     },
   },

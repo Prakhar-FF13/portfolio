@@ -41,13 +41,13 @@ export default function Index() {
         <div className="flex justify-around p-4 px-6 border-b-[1px] border-black border-dashed">
           <GeneralButton
             onClick={() => setActiveTab(1)}
-            classes={`text-textcolormain ${activeTab === 1 ? "bg-navbaractive text-black" : "hover:bg-navbarhover bg-navbarnormal"}`}
+            classes={`${activeTab === 1 ? "bg-navbaractive text-black" : "hover:bg-navbarhover bg-navbarnormal text-textcolormain "}`}
           >
             Blogs
           </GeneralButton>
           <GeneralButton
             onClick={() => setActiveTab(2)}
-            classes={`text-textcolormain ${activeTab === 2 ? "bg-navbaractive text-black" : "hover:bg-navbarhover bg-navbarnormal"}`}
+            classes={`${activeTab === 2 ? "bg-navbaractive text-black" : "hover:bg-navbarhover bg-navbarnormal text-textcolormain "}`}
           >
             Projects
           </GeneralButton>

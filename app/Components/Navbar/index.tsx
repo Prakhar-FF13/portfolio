@@ -1,7 +1,8 @@
 import { Form, Link } from "@remix-run/react";
 import { ThemeSession } from "../../session";
-import { Menu } from "@headlessui/react";
-import { Hamburger } from "../svgs";
+import { Menu, Transition } from "@headlessui/react";
+import { Dark, Hamburger, Light } from "../svgs";
+import { Fragment } from "react";
 
 export default function Navbar({ theme = "light" }: ThemeSession) {
 
@@ -15,30 +16,40 @@ export default function Navbar({ theme = "light" }: ThemeSession) {
       </div>
       <Menu as="div" className="sm:hidden inline-block relative h-6">
         <Menu.Button className="h-6"><Hamburger /></Menu.Button>
-        <Menu.Items className="absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-          <div className="px-1 py-1">
-            <Menu.Item >
-              {() => (
-                <Link to="/" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Home</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {() => (
-                <Link to="/blogs" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Blogs</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {() => (
-                <Link to="/projects" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Projects</Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {() => (
-                <Link to="/resume" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Resume</Link>
-              )}
-            </Menu.Item>
-          </div>
-        </Menu.Items>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-itembgcolor shadow-lg ring-1 ring-black/5 focus:outline-none">
+            <div className="px-1 py-1">
+              <Menu.Item >
+                {() => (
+                  <Link to="/" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Home</Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {() => (
+                  <Link to="/blogs" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Blogs</Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {() => (
+                  <Link to="/projects" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Projects</Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {() => (
+                  <Link to="/resume" className="group flex w-full items-center rounded-md px-2 py-2 text-sm">Resume</Link>
+                )}
+              </Menu.Item>
+            </div>
+          </Menu.Items>
+        </Transition>
       </Menu>
       {
         /*
@@ -50,7 +61,7 @@ export default function Navbar({ theme = "light" }: ThemeSession) {
       <Form method="POST" action="/">
         <input type="text" name="theme" value={theme === "light" ? "dark" : "light"} hidden readOnly />
         <button type="submit">
-          {theme === "light" ? "Dark Mode" : "Light Mode"}
+          {theme === "light" ? <Dark /> : <Light />}
         </button>
       </Form>
     </div>

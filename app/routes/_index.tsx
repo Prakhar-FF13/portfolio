@@ -5,6 +5,7 @@ import { useState } from "react";
 import { GeneralButton } from "~/Components/Buttons";
 import ContentListView from "~/Components/ContentListView";
 import { useLoaderData } from "@remix-run/react";
+import classNames from "~/utils/classNames";
 
 export const meta: MetaFunction = () => {
   return [
@@ -38,8 +39,17 @@ export default function Index() {
   const [activeTab, setActiveTab] = useState<number>(1)
 
   return (
-    <div className="flex gap-20">
-      <div className="flex-1 bg-itembgcolor rounded-lg flex flex-col pb-6">
+    <div
+      className={classNames(
+        "flex",
+        "miniscule:flex-col miniscule:gap-12",
+        "xs:flex-col xs:gap-12",
+        "sm:flex-col sm:gap-12",
+        "md:flex-row md:gap-4",
+        "lg:gap-20"
+      )}
+    >
+      <div className="flex-1 bg-itembgcolor rounded-lg flex flex-col pb-6 max-h-[600px]">
         <div className="flex flex-row-reverse p-4">
           <Circles />
         </div>
@@ -60,7 +70,7 @@ export default function Index() {
           <Mail />
         </div>
       </div>
-      <div className="flex-1 bg-itembgcolor rounded-lg">
+      <div className="flex-1 bg-itembgcolor rounded-lg max-h-[600px] overflow-y-scroll">
         <div className="flex justify-around p-4 px-6 border-b-[1px] border-black border-dashed">
           <GeneralButton
             onClick={() => setActiveTab(1)}

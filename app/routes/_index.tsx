@@ -3,6 +3,8 @@ import { Hello, Circles, Twitter, Linkedin, Mail } from "../Components/svgs";
 import textGradientClass from "~/utils/textGradientClass";
 import { useState } from "react";
 import { GeneralButton } from "~/Components/Buttons";
+import ContentListView from "~/Components/ContentListView";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,13 +13,34 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function loader() {
+  const blogContent = [
+    {
+      title: "Understanding WebRTC through an example",
+      desciption: "WebRTC is a peer to peer connection protocol which was developed to simplify peer to peer communication. With this creating video based application has become a lot easier, in this blog we will look at how one can create a video group chat example."
+    },
+    {
+      title: "Understanding WebRTC through an example",
+      desciption: "WebRTC is a peer to peer connection protocol which was developed to simplify peer to peer communication. With this creating video based application has become a lot easier, in this blog we will look at how one can create a video group chat example."
+    },
+    {
+      title: "Understanding WebRTC through an example",
+      desciption: "WebRTC is a peer to peer connection protocol which was developed to simplify peer to peer communication. With this creating video based application has become a lot easier, in this blog we will look at how one can create a video group chat example."
+    }
+  ]
+
+  return { blogContent }
+}
+
 export default function Index() {
+  const { blogContent } = useLoaderData<typeof loader>()
+
   const [activeTab, setActiveTab] = useState<number>(1)
 
   return (
     <div className="flex gap-20">
       <div className="flex-1 bg-itembgcolor rounded-lg flex flex-col pb-6">
-        <div className="flex flex-row-reverse p-1">
+        <div className="flex flex-row-reverse p-4">
           <Circles />
         </div>
         <div className="p-9 pt-0 flex flex-col mb-11">
@@ -52,7 +75,14 @@ export default function Index() {
             Projects
           </GeneralButton>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col px-[30px] py-4">
+          {blogContent.map((blog, idx) =>
+            <ContentListView
+              key={idx}
+              title={(idx + 1) + ". " + blog.title}
+              description={blog.desciption}
+            />
+          )}
         </div>
       </div>
     </div >

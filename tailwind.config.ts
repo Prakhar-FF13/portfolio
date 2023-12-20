@@ -16,6 +16,9 @@ export default {
         twittercolor: 'var(--twittercolor)',
         linkedincolor: 'var(--linkedincolor)',
         mailcolor: 'var(--mailcolor)',
+        navbaractive: 'var(--navbaractive)',
+        navbarhover: 'var(--navbarhover)',
+        navbarnormal: 'var(--navbarnormal)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

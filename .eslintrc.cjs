@@ -38,6 +38,9 @@ module.exports = {
         react: {
           version: "detect",
         },
+        "import/resolver": {
+          typescript: {} // this loads <rootdir>/tsconfig.json to eslint
+        },
         formComponents: ["Form"],
         linkComponents: [
           { name: "Link", linkAttribute: "to" },

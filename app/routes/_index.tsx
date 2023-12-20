@@ -71,7 +71,7 @@ export default function Index() {
         </div>
       </div>
       <div className="flex-1 bg-itembgcolor rounded-lg max-h-[600px] overflow-y-scroll">
-        <div className="flex justify-around p-4 px-6 border-b-[1px] border-black border-dashed">
+        <div className="flex justify-around p-4 px-6 border-b-[1px] border-black border-dashed sticky top-0 bg-itembgcolor">
           <GeneralButton
             onClick={() => setActiveTab(1)}
             classes={`${activeTab === 1 ? "bg-navbaractive text-black" : "hover:bg-navbarhover bg-navbarnormal text-textcolormain "}`}

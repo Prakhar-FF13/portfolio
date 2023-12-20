@@ -24,7 +24,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const session = await themeCookieSession.getSession(request.headers.get("cookie"))
 
   if (session.has("theme")) {
-    return json({ theme: session.get("theme") }, {
+    const theme = session.get("theme") ?? "light"
+    return json({ theme }, {
       headers: {
         'Set-Cookie': await themeCookieSession.commitSession(session)
       }

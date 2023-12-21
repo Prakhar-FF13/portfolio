@@ -16,7 +16,7 @@ export default function Navbar({ theme = "light" }: ThemeSession) {
       <div className="sm:hidden inline-block relative h-6">
         <Menu position="bottom-start">
           <Menu.Target>
-            <button><Hamburger /></button>
+            <button aria-label="Navigation Dropdown"><Hamburger /></button>
           </Menu.Target>
 
           <Menu.Dropdown w={200} classNames={{
@@ -70,7 +70,7 @@ export default function Navbar({ theme = "light" }: ThemeSession) {
       }
       <Form method="POST" action="/">
         <input type="text" name="theme" value={theme === "light" ? "dark" : "light"} hidden readOnly />
-        <button type="submit">
+        <button aria-label="Theme Toggle" type="submit">
           {theme === "light" ? <Dark /> : <Light />}
         </button>
       </Form>

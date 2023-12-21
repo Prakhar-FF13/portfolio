@@ -23,7 +23,6 @@ import ContentListView from "~/Components/ContentListView";
 import { useLoaderData } from "@remix-run/react";
 import classNames from "~/utils/classNames";
 import { Carousel } from "@mantine/carousel";
-import ProgressBar from "~/Components/ProgressBar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -138,20 +137,18 @@ function QuickAcces() {
 }
 
 function SkillsSection() {
-  const [, setSelectedSkill] = useState<number>(0)
-
   const components = useCallback(() => [
-    React,
-    Nodejs,
-    TypeScript,
-    AWS,
-    Docker,
-    Kubernetes,
-    Linux,
-    Ansible,
-    Jenkins,
-    GoLang
-  ].map((Component, idx) => CarousalSlide(Component, () => setSelectedSkill(idx))), [])()
+    { component: React, label: "Reactjs" },
+    { component: Nodejs, label: "Nodejs" },
+    { component: TypeScript, label: "Typescript" },
+    { component: AWS, label: "AWS" },
+    { component: Docker, label: "Docker" },
+    { component: Kubernetes, label: "Kubernetes" },
+    { component: Linux, label: "Linux" },
+    { component: Ansible, label: "Ansible" },
+    { component: Jenkins, label: "Jenkins" },
+    { component: GoLang, label: "Golang" }
+  ].map(({ component, label }) => CarousalSlide(component, label)), [])()
 
   return (
     <div className="flex flex-col mb-10 gap-[30px]">
@@ -174,21 +171,16 @@ function SkillsSection() {
           {components}
         </Carousel>
       </div>
-      <div className="bg-itembgcolor rounded-lg">
-        <ProgressBar completePercent={80} />
-      </div>
     </div >
   )
 }
 
-function CarousalSlide(Component: ComponentType, onClick: () => void) {
+function CarousalSlide(Component: ComponentType, skill: string) {
   const id = useId()
 
   return (
-    <Carousel.Slide key={id}>
-      <button onClick={onClick}>
-        <Component />
-      </button>
+    <Carousel.Slide key={id} aria-label={skill}>
+      <Component />
     </Carousel.Slide>
   )
 }

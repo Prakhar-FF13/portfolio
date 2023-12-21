@@ -1,3 +1,8 @@
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import '@mantine/code-highlight/styles.css';
+import '@mantine/carousel/styles.css';
+
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { ActionFunctionArgs, json, redirect, type LinksFunction, type LoaderFunctionArgs } from "@remix-run/node";
 import {
@@ -14,6 +19,7 @@ import stylesheet from "./styles/tailwind.css";
 import MaxWidthWrapper from "./Components/MaxWidthWrapper";
 import Navbar from "./Components/Navbar";
 import { themeCookieSession } from "./session";
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -59,6 +65,10 @@ export async function action({ request }: ActionFunctionArgs) {
   })
 }
 
+const themeMantine = createTheme({
+  /** Put your mantine theme override here */
+});
+
 export default function App() {
   const data = useLoaderData<typeof loader>()
   const theme = data.theme === "dark" ? "dark" : "light";
@@ -70,15 +80,18 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <ColorSchemeScript />
       </head>
       <body className="bg-backgroundcolor font-inter text-textcolormain">
-        <MaxWidthWrapper>
-          <Navbar theme={theme} />
-          <Outlet />
-        </MaxWidthWrapper>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <MantineProvider theme={themeMantine}>
+          <MaxWidthWrapper>
+            <Navbar theme={theme} />
+            <Outlet />
+          </MaxWidthWrapper>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </MantineProvider>
       </body>
     </html>
   );

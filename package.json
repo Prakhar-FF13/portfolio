@@ -11,11 +11,17 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@mantine/carousel": "^7.3.2",
+    "@mantine/code-highlight": "^7.3.2",
+    "@mantine/core": "^7.3.2",
+    "@mantine/dates": "^7.3.2",
+    "@mantine/hooks": "^7.3.2",
     "@remix-run/css-bundle": "^2.4.0",
     "@remix-run/node": "^2.4.0",
     "@remix-run/react": "^2.4.0",
     "@remix-run/serve": "^2.4.0",
+    "dayjs": "^1.11.10",
+    "embla-carousel-react": "^7.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
@@ -32,6 +38,9 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.32",
+    "postcss-preset-mantine": "^1.12.1",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.3.7",
     "typescript": "^5.1.6"
   },

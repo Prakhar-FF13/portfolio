@@ -19,6 +19,7 @@ export default {
         navbaractive: 'var(--navbaractive)',
         navbarhover: 'var(--navbarhover)',
         navbarnormal: 'var(--navbarnormal)',
+        sectionheadingcolor: 'var(--sectionheadingcolor)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

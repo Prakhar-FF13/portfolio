@@ -1,22 +1,29 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Hello, Circles, Twitter, Linkedin, Mail } from "../Components/svgs";
+import {
+  Hello,
+  Circles,
+  Twitter,
+  Linkedin,
+  Mail,
+  React,
+  Nodejs,
+  TypeScript,
+  AWS,
+  Docker,
+  Kubernetes,
+  Linux,
+  Ansible,
+  Jenkins,
+  GoLang
+} from "../Components/svgs";
 import textGradientClass from "~/utils/textGradientClass";
-import { useState } from "react";
+import { ComponentType, useCallback, useId, useState } from "react";
 import { GeneralButton } from "~/Components/Buttons";
 import ContentListView from "~/Components/ContentListView";
 import { useLoaderData } from "@remix-run/react";
 import classNames from "~/utils/classNames";
 import { Carousel } from "@mantine/carousel";
-import { React } from "~/Components/svgs/React";
-import { Nodejs } from "~/Components/svgs/Nodejs";
-import { TypeScript } from "~/Components/svgs/TypeScript";
-import { AWS } from "~/Components/svgs/AWS";
-import { Docker } from "~/Components/svgs/Docker";
-import { Kubernetes } from "~/Components/svgs/Kubernetes";
-import { Linux } from "~/Components/svgs/Linux";
-import { Ansible } from "~/Components/svgs/Ansible";
-import { Jenkins } from "~/Components/svgs/Jenkins";
-import { GoLang } from "~/Components/svgs/Golang";
+import ProgressBar from "~/Components/ProgressBar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -131,12 +138,27 @@ function QuickAcces() {
 }
 
 function SkillsSection() {
+  const [, setSelectedSkill] = useState<number>(0)
+
+  const components = useCallback(() => [
+    React,
+    Nodejs,
+    TypeScript,
+    AWS,
+    Docker,
+    Kubernetes,
+    Linux,
+    Ansible,
+    Jenkins,
+    GoLang
+  ].map((Component, idx) => CarousalSlide(Component, () => setSelectedSkill(idx))), [])()
+
   return (
     <div className="flex flex-col mb-10 gap-[30px]">
       <div className="flex">
         <span className="rounded-lg bg-sectionheadingcolor px-16 py-5 text-black">Skills</span>
       </div>
-      <div>
+      <div className="mb-5">
         <Carousel
           slideSize={"100px"}
           align="start"
@@ -149,18 +171,24 @@ function SkillsSection() {
             control: "bg-itembgcolor text-textcolormain",
           }}
         >
-          <Carousel.Slide><React /></Carousel.Slide>
-          <Carousel.Slide><Nodejs /></Carousel.Slide>
-          <Carousel.Slide><TypeScript /></Carousel.Slide>
-          <Carousel.Slide><AWS /></Carousel.Slide>
-          <Carousel.Slide><Docker /></Carousel.Slide>
-          <Carousel.Slide><Kubernetes /></Carousel.Slide>
-          <Carousel.Slide><Linux /></Carousel.Slide>
-          <Carousel.Slide><Ansible /></Carousel.Slide>
-          <Carousel.Slide><Jenkins /></Carousel.Slide>
-          <Carousel.Slide><GoLang /></Carousel.Slide>
+          {components}
         </Carousel>
       </div>
-    </div>
+      <div className="bg-itembgcolor rounded-lg">
+        <ProgressBar completePercent={80} />
+      </div>
+    </div >
+  )
+}
+
+function CarousalSlide(Component: ComponentType, onClick: () => void) {
+  const id = useId()
+
+  return (
+    <Carousel.Slide key={id}>
+      <button onClick={onClick}>
+        <Component />
+      </button>
+    </Carousel.Slide>
   )
 }

@@ -20,6 +20,7 @@ export default {
         navbarhover: 'var(--navbarhover)',
         navbarnormal: 'var(--navbarnormal)',
         sectionheadingcolor: 'var(--sectionheadingcolor)',
+        bgcolorprogressbar: 'var(--colorprogressbar)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

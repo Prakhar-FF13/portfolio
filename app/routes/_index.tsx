@@ -134,7 +134,7 @@ function SkillsSection() {
   return (
     <div className="flex flex-col mb-10 gap-[30px]">
       <div className="flex">
-        <span className="rounded-lg bg-sectionheadingcolor px-16 py-5">Skills</span>
+        <span className="rounded-lg bg-sectionheadingcolor px-16 py-5 text-black">Skills</span>
       </div>
       <div>
         <Carousel

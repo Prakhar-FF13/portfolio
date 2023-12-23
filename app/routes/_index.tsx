@@ -295,7 +295,7 @@ function WorkDetails(title: string, date: string, image: string | null, details:
             <li key={idx}>{d}</li>
           )}
         </ul>
-        {image && <img src={image} alt={title} className="h-[60px] w-[60px]" />}
+        {image && <img src={image} alt={title} className="h-[60px] w-[60px]" loading="lazy" />}
       </div>
     </div>
   )
@@ -343,7 +343,7 @@ function Education(title: string, date: string, logo: string | null, details: st
         </ul>
         {logo &&
           <div className="flex flex-col gap-2">
-            <img src={logo} alt={title} className="h-[70px] w-[100px]" />
+            <img src={logo} alt={title} className="h-[70px] w-[100px]" loading="lazy" />
             <p className="ml-auto font-leagueSpartan text-sm">{grade}</p>
           </div>
         }

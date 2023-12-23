@@ -285,7 +285,7 @@ function WorkDetails(title: string, date: string, image: string | null, details:
 
   return (
     <div className="flex flex-col gap-5" key={id}>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-baseline">
         <p className="font-leagueSpartan font-medium text-topicheadingcolor text-2xl flex-1">{title}</p>
         <p className="font-leagueSpartan">{date}</p>
       </div>
@@ -331,7 +331,7 @@ function Education(title: string, date: string, logo: string | null, details: st
 
   return (
     <div className="flex flex-col gap-5" key={id}>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-baseline">
         <p className="font-leagueSpartan font-medium text-topicheadingcolor text-2xl flex-1">{title}</p>
         <p>{date}</p>
       </div>

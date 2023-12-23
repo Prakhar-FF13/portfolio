@@ -5,6 +5,7 @@ import fullStackFoundations from "../assets/certificates/Fullstack Foundations.p
 import professionalForms from "../assets/certificates/Professionals Forms.png"
 import reactFundamentals from "../assets/certificates/React Fundamentals.png"
 import reactHooks from "../assets/certificates/React Hooks.png"
+import typescript from "../assets/certificates/Typescript.png"
 
 export const certificates = [
   {
@@ -12,6 +13,11 @@ export const certificates = [
     label: "CSS for Javascript Devs",
     skills: ["Rendering Logic", "Flexbox", "Grid",
       "Responsive and Behavioural CSS", "Typography and Images"]
+  },
+  {
+    cert: typescript,
+    label: "TypeScript",
+    skills: ["Typescript basics", "Interfaces", "Combining Types", "Generics", "Advanced Typescript functions"]
   },
   {
     cert: reactFundamentals,

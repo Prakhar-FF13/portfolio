@@ -22,7 +22,9 @@ import { GeneralButton } from "~/Components/Buttons";
 import ContentListView from "~/Components/ContentListView";
 import { useLoaderData } from "@remix-run/react";
 import classNames from "~/utils/classNames";
-import { Carousel } from "@mantine/carousel";
+import { Carousel, CarouselSlide } from "@mantine/carousel";
+import SectionSeperator from "~/Components/SectionSeperator";
+import { certificates } from "~/utils/certificates.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -47,22 +49,23 @@ export async function loader() {
     }
   ]
 
-  return { blogContent }
+  return { blogContent, certificates }
 }
 
 export default function Index() {
   return (
-    <>
+    <div className="flex flex-col gap-10">
       <HeroSection />
       <SkillsSection />
-    </>
+      <CertificatesSection />
+    </div>
   );
 }
 
 function HeroSection() {
   return (
     <div className={classNames(
-      "flex mb-10",
+      "flex",
       "miniscule:flex-col miniscule:gap-12",
       "xs:flex-col xs:gap-12",
       "sm:flex-col sm:gap-12",
@@ -148,14 +151,12 @@ function SkillsSection() {
     { component: Ansible, label: "Ansible" },
     { component: Jenkins, label: "Jenkins" },
     { component: GoLang, label: "Golang" }
-  ].map(({ component, label }) => CarousalSlide(component, label)), [])()
+  ].map(({ component, label }) => SkillCarousalSlide(component, label)), [])()
 
   return (
-    <div className="flex flex-col mb-10 gap-[30px]">
-      <div className="flex">
-        <span className="rounded-lg bg-sectionheadingcolor px-16 py-5 text-black">Skills</span>
-      </div>
-      <div className="mb-5">
+    <div className="flex flex-col gap-[30px]">
+      <SectionSeperator>Skills</SectionSeperator>
+      <div>
         <Carousel
           slideSize={"100px"}
           align="start"
@@ -175,7 +176,7 @@ function SkillsSection() {
   )
 }
 
-function CarousalSlide(Component: ComponentType, skill: string) {
+function SkillCarousalSlide(Component: ComponentType, skill: string) {
   const id = useId()
 
   return (
@@ -183,4 +184,57 @@ function CarousalSlide(Component: ComponentType, skill: string) {
       <Component />
     </Carousel.Slide>
   )
+}
+
+function CertificatesSection() {
+  const { certificates } = useLoaderData<typeof loader>()
+
+  const certificateSlides = useCallback(() => certificates.map((cert) =>
+    CertificateCarouselSlide(cert.cert, cert.label, cert.skills)
+  ), [certificates])()
+
+  return (
+    <div className="flex flex-col gap-[30px]">
+      <SectionSeperator>Certificates</SectionSeperator>
+      <div className="bg-itembgcolor rounded-lg p-5">
+        <Carousel
+          slideSize={"300px"}
+          withControls
+          align="start"
+          slideGap="lg"
+          controlsOffset="xs"
+          dragFree
+          draggable
+          loop
+          withIndicators
+          containScroll="trimSnaps"
+          controlSize={"32px"}
+          classNames={{
+            control: "bg-itembgcolor text-textcolormain",
+            indicator: "bg-primarycolor1",
+          }}
+        >
+          {certificateSlides}
+        </Carousel>
+      </div>
+    </div >
+  )
+}
+
+function CertificateCarouselSlide(cert: string, label: string, skills: string[]) {
+  const id = useId()
+
+  return <CarouselSlide key={id}>
+    <div className="flex flex-col gap-2 max-w-[300px]">
+      <img src={cert} alt={label} className="w-[300px] h-[200px]" loading="lazy" />
+      <div className="flex flex-col gap-6">
+        <p className="font-leagueSpartan text-2xl text-topicheadingcolor font-medium">{label}</p>
+        <ul className="list-disc list-inside font-leagueSpartan text-lg">
+          {skills.map((sk) =>
+            <li key={sk}>{sk}</li>
+          )}
+        </ul>
+      </div>
+    </div>
+  </CarouselSlide>
 }

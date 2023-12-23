@@ -22,6 +22,7 @@
     --navbarnormal: rgba(72, 72, 72, 0.3);
     --sectionheadingcolor: rgba(255, 171, 126, 0.8);
     --bgcolorprogressbar: rgba(217, 217, 217, 1);
+    --topicheadingcolor: rgba(255, 157, 181, 1);
   }
 
   html[data-theme='dark'] {
@@ -41,5 +42,6 @@
     --navbarnormal: rgba(72, 72, 72, 0.6);
     --sectionheadingcolor: rgba(255, 242, 123, 1);
     --bgcolorprogressbar: rgba(217, 217, 217, 1);
+    --topicheadingcolor: rgba(165, 255, 244, 1)
   }
 }

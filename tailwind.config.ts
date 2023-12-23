@@ -21,6 +21,7 @@ export default {
         navbarnormal: 'var(--navbarnormal)',
         sectionheadingcolor: 'var(--sectionheadingcolor)',
         bgcolorprogressbar: 'var(--colorprogressbar)',
+        topicheadingcolor: 'var(--topicheadingcolor)',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

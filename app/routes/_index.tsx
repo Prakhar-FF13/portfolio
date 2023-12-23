@@ -25,6 +25,8 @@ import classNames from "~/utils/classNames";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import SectionSeperator from "~/Components/SectionSeperator";
 import { certificates } from "~/utils/certificates.server";
+import { workDetails } from "~/utils/work.server";
+import { educationDetails } from "~/utils/education.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -49,7 +51,7 @@ export async function loader() {
     }
   ]
 
-  return { blogContent, certificates }
+  return { blogContent, certificates, workDetails, educationDetails }
 }
 
 export default function Index() {
@@ -248,5 +250,102 @@ function WorkAndEducationSection() {
     "md:flex-row md:gap-4",
     "lg:gap-20"
   )}
-  ></div>
+  >
+    <WorkSection />
+    <EducationSection />
+  </div>
+}
+
+function WorkSection() {
+  const { workDetails } = useLoaderData<typeof loader>()
+
+  const works = useCallback(() => workDetails.map((work) =>
+    WorkDetails(
+      work.title,
+      work.date,
+      work.image,
+      work.details
+    )
+  ), [workDetails])()
+
+  return <div className="flex flex-col flex-1 gap-[30px]">
+    <SectionSeperator>
+      Work/Open Source/BootCamps
+    </SectionSeperator>
+    <div className="bg-itembgcolor rounded-lg p-5">
+      <div className="flex flex-col gap-7">
+        {works}
+      </div>
+    </div>
+  </div>
+}
+
+function WorkDetails(title: string, date: string, image: string | null, details: string[]) {
+  const id = useId()
+
+  return (
+    <div className="flex flex-col gap-5" key={id}>
+      <div className="flex justify-between">
+        <p className="font-leagueSpartan font-medium text-topicheadingcolor text-2xl flex-1">{title}</p>
+        <p className="font-leagueSpartan">{date}</p>
+      </div>
+      <div className="flex justify-between gap-1">
+        <ul className="list-disc list-inside font-leagueSpartan text-xl flex-1">
+          {details.map((d, idx) =>
+            <li key={idx}>{d}</li>
+          )}
+        </ul>
+        {image && <img src={image} alt={title} className="h-[60px] w-[60px]" />}
+      </div>
+    </div>
+  )
+}
+
+function EducationSection() {
+  const { educationDetails } = useLoaderData<typeof loader>()
+
+  const educations = useCallback(() => educationDetails.map((edu) =>
+    Education(
+      edu.title,
+      edu.date,
+      edu.logo,
+      edu.details,
+      edu.grade
+    )
+  ), [educationDetails])()
+
+  return <div className="flex flex-col flex-1 gap-[30px]">
+    <SectionSeperator>
+      Formal Education
+    </SectionSeperator>
+    <div className="bg-itembgcolor rounded-lg p-5 flex flex-col gap-7">
+      {educations}
+    </div>
+  </div>
+}
+
+function Education(title: string, date: string, logo: string | null, details: string[], grade: string) {
+  const id = useId()
+
+  return (
+    <div className="flex flex-col gap-5" key={id}>
+      <div className="flex justify-between">
+        <p className="font-leagueSpartan font-medium text-topicheadingcolor text-2xl flex-1">{title}</p>
+        <p>{date}</p>
+      </div>
+      <div className="flex justify-between gap-1">
+        <ul className="list-disc list-inside font-leagueSpartan text-xl">
+          {details.map((d, idx) =>
+            <li key={idx}>{d}</li>
+          )}
+        </ul>
+        {logo &&
+          <div className="flex flex-col gap-2">
+            <img src={logo} alt={title} className="h-[70px] w-[100px]" />
+            <p className="ml-auto font-leagueSpartan text-sm">{grade}</p>
+          </div>
+        }
+      </div>
+    </div>
+  )
 }

@@ -58,6 +58,7 @@ export default function Index() {
       <HeroSection />
       <SkillsSection />
       <CertificatesSection />
+      <WorkAndEducationSection />
     </div>
   );
 }
@@ -205,7 +206,6 @@ function CertificatesSection() {
           controlsOffset="xs"
           dragFree
           draggable
-          loop
           withIndicators
           containScroll="trimSnaps"
           controlSize={"32px"}
@@ -237,4 +237,16 @@ function CertificateCarouselSlide(cert: string, label: string, skills: string[])
       </div>
     </div>
   </CarouselSlide>
+}
+
+function WorkAndEducationSection() {
+  return <div className={classNames(
+    "flex",
+    "miniscule:flex-col miniscule:gap-12",
+    "xs:flex-col xs:gap-12",
+    "sm:flex-col sm:gap-12",
+    "md:flex-row md:gap-4",
+    "lg:gap-20"
+  )}
+  ></div>
 }

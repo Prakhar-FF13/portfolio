@@ -7,7 +7,7 @@ import { Menu } from "@mantine/core";
 export default function Navbar({ theme = "light" }: ThemeSession) {
   return (
     <div className="flex justify-between align-middle mt-6 mb-10 rounded-lg py-7 px-9 bg-itembgcolor">
-      <div className="hidden sm:flex gap-16">
+      <div className="hidden sm:flex gap-16 items-center">
         <NavLink to="/" className={({ isActive }) => isActive ? "text-navbaractive font-bold" : "hover:text-navbaractive"}>Home</NavLink>
         <NavLink to="/blogs" className={({ isActive }) => isActive ? "text-navbaractive font-bold" : "hover:text-navbaractive"}>Blogs</NavLink>
         <NavLink to="/projects" className={({ isActive }) => isActive ? "text-navbaractive font-bold" : "hover:text-navbaractive"}>Projects</NavLink>
@@ -68,7 +68,7 @@ export default function Navbar({ theme = "light" }: ThemeSession) {
             else send request for setting light theme
         */
       }
-      <Form method="POST" action="/">
+      <Form method="POST" action="/" className="flex items-center">
         <input type="text" name="theme" value={theme === "light" ? "dark" : "light"} hidden readOnly />
         <button aria-label="Theme Toggle" type="submit">
           {theme === "light" ? <Dark /> : <Light />}

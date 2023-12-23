@@ -273,7 +273,7 @@ function WorkSection() {
       Work/Open Source/BootCamps
     </SectionSeperator>
     <div className="bg-itembgcolor rounded-lg p-5">
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-7 h-[600px] overflow-y-scroll">
         {works}
       </div>
     </div>
@@ -318,8 +318,10 @@ function EducationSection() {
     <SectionSeperator>
       Formal Education
     </SectionSeperator>
-    <div className="bg-itembgcolor rounded-lg p-5 flex flex-col gap-7">
-      {educations}
+    <div className="bg-itembgcolor rounded-lg p-5">
+      <div className="flex flex-col gap-7 h-[600px] overflow-y-scroll">
+        {educations}
+      </div>
     </div>
   </div>
 }

@@ -17,7 +17,7 @@ import {
   GoLang
 } from "../Components/svgs";
 import textGradientClass from "~/utils/textGradientClass";
-import { ComponentType, useCallback, useId, useState } from "react";
+import { ComponentType, useCallback, useId, useRef, useState } from "react";
 import { GeneralButton } from "~/Components/Buttons";
 import ContentListView from "~/Components/ContentListView";
 import { useLoaderData } from "@remix-run/react";
@@ -27,6 +27,7 @@ import SectionSeperator from "~/Components/SectionSeperator";
 import { certificates } from "~/utils/certificates.server";
 import { workDetails } from "~/utils/work.server";
 import { educationDetails } from "~/utils/education.server";
+import Autoplay from 'embla-carousel-autoplay';
 
 export const meta: MetaFunction = () => {
   return [
@@ -156,6 +157,8 @@ function SkillsSection() {
     { component: GoLang, label: "Golang" }
   ].map(({ component, label }) => SkillCarousalSlide(component, label)), [])()
 
+  const autoplay = useRef(Autoplay({ delay: 1000 }))
+
   return (
     <div className="flex flex-col gap-[30px]">
       <SectionSeperator>Skills</SectionSeperator>
@@ -166,11 +169,15 @@ function SkillsSection() {
           slideGap="lg"
           controlsOffset="xs"
           dragFree
+          loop
           containScroll="trimSnaps"
           controlSize={"32px"}
           classNames={{
             control: "bg-itembgcolor text-textcolormain",
           }}
+          plugins={[autoplay.current]}
+          onMouseEnter={autoplay.current.stop}
+          onMouseLeave={autoplay.current.reset}
         >
           {components}
         </Carousel>
@@ -196,6 +203,8 @@ function CertificatesSection() {
     CertificateCarouselSlide(cert.cert, cert.label, cert.skills)
   ), [certificates])()
 
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
+
   return (
     <div className="flex flex-col gap-[30px]">
       <SectionSeperator>Certificates</SectionSeperator>
@@ -208,6 +217,7 @@ function CertificatesSection() {
           controlsOffset="xs"
           dragFree
           draggable
+          loop
           withIndicators
           containScroll="trimSnaps"
           controlSize={"32px"}
@@ -215,6 +225,9 @@ function CertificatesSection() {
             control: "bg-itembgcolor text-textcolormain",
             indicator: "bg-primarycolor1",
           }}
+          plugins={[autoplay.current]}
+          onMouseEnter={autoplay.current.stop}
+          onMouseLeave={autoplay.current.reset}
         >
           {certificateSlides}
         </Carousel>

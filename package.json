@@ -21,6 +21,7 @@
     "@remix-run/react": "^2.4.0",
     "@remix-run/serve": "^2.4.0",
     "dayjs": "^1.11.10",
+    "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "esbuild": "^0.19.10",
     "eslint-import-resolver-typescript": "^3.6.1",

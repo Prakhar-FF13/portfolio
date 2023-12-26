@@ -59,7 +59,7 @@ export async function action({ request }: ActionFunctionArgs) {
   else // somehow something different is received set to light only
     session.set("theme", "light")
 
-  return redirect(request.url, {
+  return redirect(request.headers.get("referer") ?? "/", {
     headers: {
       'Set-Cookie': await themeCookieSession.commitSession(session)
     }

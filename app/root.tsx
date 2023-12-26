@@ -20,6 +20,7 @@ import MaxWidthWrapper from "./Components/MaxWidthWrapper";
 import Navbar from "./Components/Navbar";
 import { themeCookieSession } from "./session";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import Footer from './Components/Footer';
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -87,6 +88,7 @@ export default function App() {
           <MaxWidthWrapper>
             <Navbar theme={theme} />
             <Outlet />
+            <Footer />
           </MaxWidthWrapper>
           <ScrollRestoration />
           <Scripts />
